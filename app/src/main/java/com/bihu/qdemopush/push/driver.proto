@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+//编译教程：http://www.jianshu.com/p/8036003cb849
+message ClientMessage
+{
+	int32     type      = 1;  //类型1=socket登录;2=取消抢红包资格;3=领取红包消息
+	HeartBeat heartBeat = 2;  //socket登录
+	LogOut    logOut    = 3;  //取消抢红包资格消息
+	RedPacket redPacket = 4;  //领取&未抢到红包消息
+}
+
+message HeartBeat
+{
+	string sid  = 1;  //服务ID
+	string imei = 2;  //手机唯一编号imei
+}
+
+message LogOut
+{
+	string sid      = 1;  //服务ID
+    int32 result    = 2;  //1成功，2失败
+    string title    = 3;  //消息标题
+    string content  = 4;  //消息内容
+}
+
+message RedPacket
+{
+	string sid      = 1;  //服务ID
+    int32 result    = 2;  //1成功，2失败
+    int32 price     = 3;  //红包金额单位分
+    string title    = 4;  //消息标题
+    string content  = 5;  //消息内容
+}
